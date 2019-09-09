@@ -35,8 +35,8 @@ lazy val commonSettings = Seq (
     Resolver.sonatypeRepo("snapshots"),
     Resolver.sonatypeRepo("releases")
   ),
-  organization := "edu.berkeley.cs",
-  version := "3.2-SNAPSHOT",
+  organization := "local.berkeley.cs",
+  version := "msyksphinz-SNAPSHOT",
   autoAPIMappings := true,
   scalaVersion := "2.12.6",
   crossScalaVersions := Seq("2.12.6", "2.11.12"),
