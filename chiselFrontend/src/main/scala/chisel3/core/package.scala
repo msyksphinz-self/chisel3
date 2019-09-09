@@ -82,6 +82,9 @@ package object core {
   type UInt = chisel3.UInt
   @deprecated("Use the version in chisel3._", "3.2")
   val UInt = chisel3.UInt
+  type TInt = chisel3.TInt
+  @deprecated("Use the version in chisel3._", "3.2")
+  val TInt = chisel3.TInt
   @deprecated("Use the version in chisel3._", "3.2")
   type SInt = chisel3.SInt
   @deprecated("Use the version in chisel3._", "3.2")

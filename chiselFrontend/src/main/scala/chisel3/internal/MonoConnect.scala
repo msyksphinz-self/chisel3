@@ -81,6 +81,8 @@ private[chisel3] object MonoConnect {
         elemConnect(sourceInfo, connectCompileOptions, sink_e, source_e, context_mod)
       case (sink_e: UInt, source_e: UInt) =>
         elemConnect(sourceInfo, connectCompileOptions, sink_e, source_e, context_mod)
+      case (sink_e: TInt, source_e: TInt) =>
+        elemConnect(sourceInfo, connectCompileOptions, sink_e, source_e, context_mod)
       case (sink_e: SInt, source_e: SInt) =>
         elemConnect(sourceInfo, connectCompileOptions, sink_e, source_e, context_mod)
       case (sink_e: FixedPoint, source_e: FixedPoint) =>

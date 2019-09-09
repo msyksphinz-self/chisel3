@@ -138,6 +138,7 @@ package object chisel3 {    // scalastyle:ignore package.object.name
   object Bits extends UIntFactory
   object UInt extends UIntFactory
   object SInt extends SIntFactory
+  object TInt extends TIntFactory
   object Bool extends BoolFactory
 
   type InstanceId = internal.InstanceId

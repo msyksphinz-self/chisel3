@@ -902,6 +902,10 @@ sealed class UInt private[chisel3] (width: Width) extends Bits(width) with Num[U
 
   private def subtractAsSInt(that: UInt)(implicit sourceInfo: SourceInfo, compileOptions: CompileOptions): SInt =
     binop(sourceInfo, SInt((this.width max that.width) + 1), SubOp, that)
+
+  def ::= (that: Bits)(implicit sourceInfo: SourceInfo, connectionCompileOptions: CompileOptions): Unit = {
+    this.connect(~that)(sourceInfo, connectionCompileOptions) // scalastyle:ignore line.size.limit
+  }
 }
 
 // This is currently a factory because both Bits and UInt inherit it.
@@ -928,6 +932,54 @@ trait UIntFactory {
     apply(KnownUIntRange(range._1, range._2))
   }
 }
+
+/** A data type for unsigned integers, represented as a binary bitvector. Defines arithmetic operations between other
+  * integer types.
+  *
+  * @define coll [[UInt]]
+  * @define numType $coll
+  * @define expandingWidth @note The width of the returned $coll is `width of this` + `1`.
+  * @define constantWidth  @note The width of the returned $coll is unchanged, i.e., `width of this`.
+  */
+sealed class TInt private[chisel3] (width: Width) extends UInt(width) with Num[UInt] {
+  /** Connect this $coll to that $coll mono-directionally and element-wise.
+    *
+    * This uses the [[MonoConnect]] algorithm.
+    *
+    * @param that the $coll to connect to
+    * @group Connect
+    */
+  def ::= (that: TInt)(implicit sourceInfo: SourceInfo, connectionCompileOptions: CompileOptions): Unit = {
+    this.connect(~that)(sourceInfo, connectionCompileOptions) // scalastyle:ignore line.size.limit
+  }
+}
+
+
+// This is currently a factory because both Bits and TInt inherit it.
+trait TIntFactory {
+  /** Create a UInt type with inferred width. */
+  def apply(): UInt = apply(Width())
+  /** Create a UInt port with specified width. */
+  def apply(width: Width): UInt = new UInt(width)
+
+   /** Create a UInt literal with specified width. */
+  protected[chisel3] def Lit(value: BigInt, width: Width): UInt = {
+    val lit = ULit(value, width)
+    val result = new UInt(lit.width)
+    // Bind result to being an Literal
+    lit.bindLitArg(result)
+  }
+
+  /** Create a UInt with the specified range */
+  def apply(range: Range): UInt = {
+    apply(range.getWidth)
+  }
+  /** Create a UInt with the specified range */
+  def apply(range: (NumericBound[Int], NumericBound[Int])): UInt = {
+    apply(KnownUIntRange(range._1, range._2))
+  }
+}
+
 
 /** A data type for signed integers, represented as a binary bitvector. Defines arithmetic operations between other
   * integer types.
