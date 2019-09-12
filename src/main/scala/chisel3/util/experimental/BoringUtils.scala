@@ -181,7 +181,7 @@ object BoringUtils {
     * component
     */
   def bore(source: Data, sinks: Seq[Data]): String = {
-    lazy val genName = addSource(source, source.instanceName, true, true)
+    val genName = addSource(source, "bore", true, true)
     sinks.map(addSink(_, genName, true, true))
     genName
   }
