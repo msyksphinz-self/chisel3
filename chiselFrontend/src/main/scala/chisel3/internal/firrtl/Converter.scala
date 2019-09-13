@@ -218,6 +218,7 @@ private[chisel3] object Converter {
     case _: ResetType => fir.ResetType
     case d: EnumType => fir.UIntType(convert(d.width))
     case d: UInt => fir.UIntType(convert(d.width))
+    case d: TInt => fir.UIntType(convert(d.width))  // msyksphinz : Temporary
     case d: SInt => fir.SIntType(convert(d.width))
     case d: FixedPoint => fir.FixedType(convert(d.width), convert(d.binaryPoint))
     case d: Analog => fir.AnalogType(convert(d.width))
@@ -266,4 +267,3 @@ private[chisel3] object Converter {
   def convert(circuit: Circuit): fir.Circuit =
     fir.Circuit(fir.NoInfo, circuit.components.map(convert), circuit.name)
 }
-

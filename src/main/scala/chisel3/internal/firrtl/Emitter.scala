@@ -32,6 +32,7 @@ private class Emitter(circuit: Circuit) {
     case d: chisel3.core.EnumType => s"UInt${d.width}"
     case d: UInt => s"UInt${d.width}"
     case d: SInt => s"SInt${d.width}"
+    case d: TInt => s"TInt${d.width}"
     case d: FixedPoint => s"Fixed${d.width}${d.binaryPoint}"
     case d: Analog => s"Analog${d.width}"
     case d: Vec[_] => s"${emitType(d.sample_element, clearDir)}[${d.length}]"

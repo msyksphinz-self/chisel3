@@ -37,12 +37,18 @@ package object chisel3 {    // scalastyle:ignore package.object.name
         /** Int to UInt conversion, recommended style for constants.
           */
         def U: UInt = UInt.Lit(bigint, Width())  // scalastyle:ignore method.name
+        /** Int to TInt conversion, recommended style for constants.
+          */
+        def T: TInt = TInt.Lit(bigint, Width())  // scalastyle:ignore method.name
         /** Int to SInt conversion, recommended style for constants.
           */
         def S: SInt = SInt.Lit(bigint, Width())  // scalastyle:ignore method.name
         /** Int to UInt conversion with specified width, recommended style for constants.
           */
         def U(width: Width): UInt = UInt.Lit(bigint, width)  // scalastyle:ignore method.name
+        /** Int to TInt conversion with specified width, recommended style for constants.
+          */
+        def T(width: Width): TInt = TInt.Lit(bigint, width)  // scalastyle:ignore method.name
         /** Int to SInt conversion with specified width, recommended style for constants.
           */
         def S(width: Width): SInt = SInt.Lit(bigint, width)  // scalastyle:ignore method.name
@@ -50,12 +56,18 @@ package object chisel3 {    // scalastyle:ignore package.object.name
         /** Int to UInt conversion, recommended style for variables.
           */
         def asUInt(): UInt = UInt.Lit(bigint, Width())
+        /** Int to TInt conversion, recommended style for variables.
+          */
+        def asTInt(): TInt = TInt.Lit(bigint, Width())
         /** Int to SInt conversion, recommended style for variables.
           */
         def asSInt(): SInt = SInt.Lit(bigint, Width())
         /** Int to UInt conversion with specified width, recommended style for variables.
           */
         def asUInt(width: Width): UInt = UInt.Lit(bigint, width)
+        /** Int to TInt conversion with specified width, recommended style for variables.
+          */
+        def asTInt(width: Width): TInt = TInt.Lit(bigint, width)
         /** Int to SInt conversion with specified width, recommended style for variables.
           */
         def asSInt(width: Width): SInt = SInt.Lit(bigint, width)
